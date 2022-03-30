@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+html{
+  scroll-behavior: smooth;
+   margin: 0;
+   padding:0;
+}
+h1,h2,h3,h4,h5,h6,p{
+  margin:0px;
+  padding:0px;
+}
+
+@font-face{
+  font-family:"Bold";
+  src:url("./assets/fonts/Sora-ExtraBold.ttf") format("truetype"); 
+}
+
+@font-face{
+  font-family:"Medium";
+  src:url("./assets/fonts/Sora-SemiBold.ttf") format("truetype"); 
+}
+@font-face{
+  font-family:"Regular";
+  src:url("./assets/fonts/Sora-Regular.ttf") format("truetype"); 
+}
+@font-face{
+  font-family:"Light";
+  src:url("./assets/fonts/Sora-Light.ttf") format("truetype"); 
+}
