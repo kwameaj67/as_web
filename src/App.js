@@ -5,45 +5,68 @@ import CustomerTable from './components/CustomerTable'
 import InvoiceTable from './components/InvoiceTable'
 
 function App() {
-  const [company, setCompany] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [employees, setEmployee] = useState([]);
+  const [customers, setCustomer] = useState([]);
+  const [invoices, setInvoice] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const [showCustomers, setCustomers] = useState(false);
   const [showInvoices, setInvoices] = useState(false);
   const [showEmployee, setEmployees] = useState(false);
 
-  const getData = async () => {
+  const getEmployeeData = async () => {
+    setLoading(true);
     var base_url = "https://remote-api.azurewebsites.net"
-    var request_url = `${base_url}/api/company/all`
+    var request_url = `${base_url}/api/employee`
     const request = await fetch(request_url);
     const response = await request.json();
-    const data = response
-    setCompany(data);
+    console.log(response)
+    setEmployee(response.employees)
     setLoading(false);
-    console.log(data)
   }
-  useEffect(() => {
-    getData()
-  }, [])
+  const getCustomerData = async () => {
+    setLoading(true);
+    var base_url = "https://remote-api.azurewebsites.net"
+    var request_url = `${base_url}/api/customer`
+    const request = await fetch(request_url);
+    const response = await request.json();
+    setCustomer(response.customers)
+    setLoading(false);
+  }
+  const getInvoiceData = async () => {
+    setLoading(true);
+    var base_url = "https://remote-api.azurewebsites.net"
+    var request_url = `${base_url}/api/invoice`
+    const request = await fetch(request_url);
+    const response = await request.json();
+    setInvoice(response.invoices)
+    setLoading(false);
+  }
+
+
   const toggleEmployees = () => {
+    getEmployeeData()
     setEmployees(true)
     setCustomers(false)
     setInvoices(false)
   }
   const toggleCustomers = () => {
+    getCustomerData()
     setCustomers(true)
     setEmployees(false)
     setInvoices(false)
   }
   const toggleInvoices = () => {
+    getInvoiceData()
     setInvoices(true)
     setEmployees(false)
     setCustomers(false)
   }
-
+  useEffect(() => {
+  }, [])
   return (
     <div className="app">
-      {/* <pre>{JSON.stringify(company[0].customers, undefined, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(employees, undefined, 2)}</pre> */}
       <div className="area">
         <div className="group_of_btns">
           <button onClick={toggleEmployees}>Get all Employees</button>
@@ -52,18 +75,18 @@ function App() {
         </div>
         <div className="table_area">
           {
-            loading && <p>Loading data...</p>
+            loading === true && <p>Loading data...</p>
           }
-          {loading === false && showEmployee ?
-            <EmployeeTable data={company[0].employees} show={showEmployee} />
+          {loading === false && showEmployee === true ?
+            <EmployeeTable data={employees} show={showEmployee} />
             : null
           }
-          {loading === false && showCustomers ?
-            <CustomerTable data={company[0].customers} show={showCustomers} />
+          {loading === false && showCustomers === true ?
+            <CustomerTable data={customers} show={showCustomers} />
             : null
           }
-          {loading === false && showInvoices ?
-            <InvoiceTable data={company[0].invoices} show={showInvoices} />
+          {loading === false && showInvoices === true ?
+            <InvoiceTable data={invoices} show={showInvoices} />
             : null
           }
         </div>
