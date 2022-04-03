@@ -14,7 +14,8 @@ function App() {
 
   const getData = async () => {
     setLoading(true);
-    var request_url = "https://localhost:5001/api/company/all"
+    var base_url = "https://remote-api.azurewebsites.net"
+    var request_url = `${base_url}/api/company/all`
     const request = await fetch(request_url);
     const response = await request.json();
     const data = response
