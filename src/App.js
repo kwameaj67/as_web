@@ -13,20 +13,18 @@ function App() {
   const [showCustomers, setCustomers] = useState(false);
   const [showInvoices, setInvoices] = useState(false);
   const [showEmployee, setEmployees] = useState(false);
+  var base_url = "https://remote-api.azurewebsites.net"
 
   const getEmployeeData = async () => {
     setLoading(true);
-    var base_url = "https://remote-api.azurewebsites.net"
     var request_url = `${base_url}/api/employee`
     const request = await fetch(request_url);
     const response = await request.json();
-    console.log(response)
     setEmployee(response.employees)
     setLoading(false);
   }
   const getCustomerData = async () => {
     setLoading(true);
-    var base_url = "https://remote-api.azurewebsites.net"
     var request_url = `${base_url}/api/customer`
     const request = await fetch(request_url);
     const response = await request.json();
@@ -35,7 +33,6 @@ function App() {
   }
   const getInvoiceData = async () => {
     setLoading(true);
-    var base_url = "https://remote-api.azurewebsites.net"
     var request_url = `${base_url}/api/invoice`
     const request = await fetch(request_url);
     const response = await request.json();
