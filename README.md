@@ -1,4 +1,5 @@
-# Clone project
+
+## Clone project
 Using `git clone {repo_url_here}`
 
 ## Install Dependencies
