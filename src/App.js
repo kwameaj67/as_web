@@ -13,7 +13,6 @@ function App() {
   const [showEmployee, setEmployees] = useState(false);
 
   const getData = async () => {
-    setLoading(true);
     var base_url = "https://remote-api.azurewebsites.net"
     var request_url = `${base_url}/api/company/all`
     const request = await fetch(request_url);
@@ -52,6 +51,9 @@ function App() {
           <button onClick={toggleInvoices}>Get all Invoices</button>
         </div>
         <div className="table_area">
+          {
+            loading && <p>Loading data...</p>
+          }
           {loading === false && showEmployee ?
             <EmployeeTable data={company[0].employees} show={showEmployee} />
             : null
